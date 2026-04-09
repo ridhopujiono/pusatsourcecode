@@ -291,6 +291,10 @@ class ProductImageService
     {
         File::ensureDirectoryExists(dirname($destinationPath));
 
+        if (! function_exists('imagewebp')) {
+            throw new RuntimeException('Ekstensi GD PHP belum dibuild dengan dukungan WebP.');
+        }
+
         if (! imagewebp($image, $destinationPath, 86)) {
             throw new RuntimeException('Gagal menyimpan file thumbnail produk.');
         }
